@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bilaad Realty — (HOME)WISE NETWORK | Smart Home Intelligence</title>
+<meta name="description" content="Bilaad Realty engineers the future of living — AI home assistants, smart security, voice automation and energy intelligence for the modern luxury home." />
+<meta name="keywords" content="smart home, home automation, smart security, AI home assistant, luxury real estate technology, Bilaad Realty" />
+<meta name="theme-color" content="#080808" />
+<meta property="og:title" content="Bilaad Realty — (HOME)WISE NETWORK" />
+<meta property="og:description" content="Premium smart-home intelligence for the modern luxury home." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23080808'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='%23FF6B35' font-family='Arial'%3EB%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#080808',
+          bgsoft: '#101010',
+          accent: '#FF6B35',
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          body: ['"Inter"', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+  :root {
+    --bg: #080808;
+    --accent: #FF6B35;
+    --glass: rgba(255,255,255,0.055);
+    --glass-border: rgba(255,255,255,0.12);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  h1, h2, h3, .font-display { font-family: 'Space Grotesk', sans-serif; }
+
+  ::selection { background: var(--accent); color: #080808; }
+
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #080808; }
+  ::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .skip-link {
+    position: absolute; left: -999px; top: 0; z-index: 999;
+    background: var(--accent); color: #080808; padding: .75rem 1.25rem;
+    font-weight: 600; border-radius: 0 0 .5rem 0;
+  }
+  .skip-link:focus { left: 0; }
+
+  /* Glass */
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+  }
+
+  /* Cursor glow */
+  #cursor-glow {
+    position: fixed;
+    top: 0; left: 0;
+    width: 420px; height: 420px;
+    margin-left: -210px; margin-top: -210px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,53,0.16) 0%, rgba(255,107,53,0.05) 40%, transparent 70%);
+    pointer-events: none;
+    z-index: 5;
+    mix-blend-mode: screen;
+    will-change: transform;
+  }
+  @media (pointer: coarse) { #cursor-glow { display: none; } }
+
+  /* Particles */
+  #particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .5; }
+
+  /* Grain / grid backdrop */
+  .grid-fade {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 90%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 90%);
+  }
+
+  /* Bracket hero */
+  .bracket {
+    display: inline-block;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .kenburns {
+    animation: kenburns 22s ease-in-out infinite alternate;
+  }
+  @keyframes kenburns {
+    0%   { transform: scale(1) translate(0,0); }
+    100% { transform: scale(1.14) translate(-1%, -1%); }
+  }
+
+  .float-badge { animation: floaty 5.5s ease-in-out infinite; }
+  .float-badge.delay-1 { animation-delay: .6s; }
+  .float-badge.delay-2 { animation-delay: 1.3s; }
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-14px); }
+  }
+
+  .scroll-mouse {
+    width: 26px; height: 42px; border-radius: 14px;
+    border: 2px solid rgba(255,255,255,0.35);
+    position: relative;
+  }
+  .scroll-mouse::before {
+    content: ''; position: absolute; top: 6px; left: 50%;
+    width: 3px; height: 8px; margin-left: -1.5px; border-radius: 2px;
+    background: var(--accent);
+    animation: scrolldot 1.8s ease-in-out infinite;
+  }
+  @keyframes scrolldot {
+    0% { opacity: 1; top: 6px; }
+    70% { opacity: 0; top: 20px; }
+    100% { opacity: 0; top: 6px; }
+  }
+
+  /* Tilt cards */
+  .tilt-card { transform-style: preserve-3d; transition: transform .25s ease, box-shadow .25s ease; will-change: transform; }
+  .tilt-card:hover { box-shadow: 0 30px 60px -20px rgba(255,107,53,0.25); }
+
+  .img-zoom { overflow: hidden; }
+  .img-zoom img { transition: transform .8s cubic-bezier(.16,1,.3,1), filter .8s ease; }
+  .img-zoom:hover img { transform: scale(1.12); }
+
+  /* Marquee */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 38s linear infinite;
+  }
+  .marquee-track:hover { animation-play-state: paused; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .duotone {
+    filter: grayscale(1) contrast(1.15) brightness(.65) sepia(.25) hue-rotate(-10deg) saturate(2.2);
+  }
+
+  .btn-accent {
+    background: var(--accent);
+    color: #080808;
+    transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease, background .3s ease;
+    box-shadow: 0 8px 30px -8px rgba(255,107,53,0.55);
+  }
+  .btn-accent:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 16px 40px -10px rgba(255,107,53,0.7); }
+  .btn-accent:active { transform: translateY(0) scale(.98); }
+
+  .btn-ghost {
+    transition: transform .3s cubic-bezier(.16,1,.3,1), background .3s ease, border-color .3s ease;
+  }
+  .btn-ghost:hover { transform: translateY(-3px); background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); }
+
+  .reveal { opacity: 0; transform: translateY(60px); }
+  .reveal-left { opacity: 0; transform: translateX(-70px); }
+  .reveal-right { opacity: 0; transform: translateX(70px); }
+  .reveal-scale { opacity: 0; transform: scale(.85); }
+
+  .nav-link {
+    position: relative;
+    color: rgba(255,255,255,0.75);
+    transition: color .25s ease;
+  }
+  .nav-link::after {
+    content: ''; position: absolute; left: 0; bottom: -4px;
+    width: 0; height: 1px; background: var(--accent);
+    transition: width .3s ease;
+  }
+  .nav-link:hover { color: #fff; }
+  .nav-link:hover::after { width: 100%; }
+
+  .grad-text {
+    background: linear-gradient(120deg, #fff 30%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .section-glow {
+    background: radial-gradient(60% 50% at 50% 0%, rgba(255,107,53,0.10), transparent 70%);
+  }
+
+  input, textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: #fff;
+  }
+  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35); }
+  input:focus, textarea:focus { border-color: var(--accent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+</head>
+
+<body class="antialiased">
+<a href="#main" class="skip-link">Skip to content</a>
+
+<canvas id="particles" aria-hidden="true"></canvas>
+<div id="cursor-glow" aria-hidden="true"></div>
+
+<!-- NAVBAR -->
+<header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-6xl">
+  <nav class="glass rounded-full px-5 sm:px-7 py-3 flex items-center justify-between" aria-label="Primary">
+    <a href="#home" class="flex items-center gap-2 shrink-0" aria-label="Bilaad Realty home">
+      <span class="w-9 h-9 rounded-full bg-accent/15 border border-accent/40 flex items-center justify-center font-display font-semibold text-accent">B</span>
+      <span class="hidden sm:flex flex-col leading-none">
+        <span class="font-display font-semibold tracking-wide text-sm">BILAAD</span>
+        <span class="text-[10px] tracking-[0.3em] text-white/50">REALTY</span>
+      </span>
+    </a>
+
+    <ul class="hidden lg:flex items-center gap-8 text-sm font-medium">
+      <li><a href="#home" class="nav-link">Home</a></li>
+      <li><a href="#services" class="nav-link">Services</a></li>
+      <li><a href="#technologies" class="nav-link">Technologies</a></li>
+      <li><a href="#clients" class="nav-link">Our Clients</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+
+    <div class="hidden md:flex items-center gap-3">
+      <a href="#login" class="btn-ghost text-sm font-medium px-4 py-2 rounded-full border border-white/15">Log In</a>
+      <a href="#signup" class="btn-accent text-sm font-semibold px-5 py-2 rounded-full">Sign Up</a>
+    </div>
+
+    <button id="menu-toggle" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-white/15" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg id="menu-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="lg:hidden glass mt-3 rounded-3xl px-6 py-6 hidden">
+    <ul class="flex flex-col gap-5 text-base font-medium">
+      <li><a href="#home" class="nav-link block">Home</a></li>
+      <li><a href="#services" class="nav-link block">Services</a></li>
+      <li><a href="#technologies" class="nav-link block">Technologies</a></li>
+      <li><a href="#clients" class="nav-link block">Our Clients</a></li>
+      <li><a href="#contact" class="nav-link block">Contact</a></li>
+    </ul>
+    <div class="flex gap-3 mt-6">
+      <a href="#login" class="flex-1 text-center btn-ghost px-4 py-2.5 rounded-full border border-white/15">Log In</a>
+      <a href="#signup" class="flex-1 text-center btn-accent font-semibold px-4 py-2.5 rounded-full">Sign Up</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 -z-10">
+    <img src="https://picsum.photos/seed/bilaad-hero/1920/1200" alt="Futuristic luxury smart home at dusk" class="kenburns w-full h-full object-cover duotone" />
+    <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(8,8,8,.55) 0%, rgba(8,8,8,.75) 55%, #080808 100%)"></div>
+    <div class="absolute inset-0 grid-fade"></div>
+  </div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6 text-center pt-24">
+    <p id="hero-eyebrow" class="reveal text-xs sm:text-sm tracking-[0.4em] text-white/55 mb-6 uppercase">Intelligent Living, Engineered</p>
+
+    <h1 class="font-display font-semibold text-[2.6rem] leading-[1.05] sm:text-6xl md:text-7xl lg:text-8xl">
+      <span id="bracket-left" class="bracket inline-block">[</span>
+      <span class="grad-text">(HOME)WISE</span><br class="sm:hidden" />
+      <span class="grad-text"> NETWORK</span>
+      <span id="bracket-right" class="bracket inline-block">]</span>
+    </h1>
+
+    <p id="hero-sub" class="reveal mt-8 text-base sm:text-lg text-white/60 max-w-2xl mx-auto">
+      Bilaad Realty fuses architecture and artificial intelligence — building homes that anticipate, protect,
+      and respond to the people who live in them.
+    </p>
+
+    <div id="hero-cta" class="reveal mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#contact" class="btn-accent font-semibold px-8 py-4 rounded-full w-full sm:w-auto text-center">Get Free Trial</a>
+      <a href="#clients" class="btn-ghost glass font-medium px-8 py-4 rounded-full w-full sm:w-auto text-center">Our Clients</a>
+    </div>
+  </div>
+
+  <!-- Floating UI badges -->
+  <div class="hidden md:block absolute left-[6%] top-[28%] z-10 float-badge">
+    <div class="glass rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
+      <span class="w-9 h-9 rounded-xl bg-accent/15 flex items-center justify-center text-accent">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/></svg>
+      </span>
+      <span class="text-sm font-medium">Smart Security</span>
+    </div>
+  </div>
+
+  <div class="hidden md:block absolute right-[7%] top-[42%] z-10 float-badge delay-1">
+    <div class="glass rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
+      <span class="w-9 h-9 rounded-xl bg-accent/15 flex items-center justify-center text-accent">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 00-3 3v7a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8"/></svg>
+      </span>
+      <span class="text-sm font-medium">Voice Control</span>
+    </div>
+  </div>
+
+  <div class="hidden md:block absolute left-[10%] bottom-[16%] z-10 float-badge delay-2">
+    <div class="glass rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
+      <span class="w-9 h-9 rounded-xl bg-accent/15 flex items-center justify-center text-accent">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      </span>
+      <span class="text-sm font-medium">Home Automation</span>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/40">
+    <span class="scroll-mouse" aria-hidden="true"></span>
+    <span class="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="relative py-16 border-y border-white/5">
+  <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <div class="reveal-scale">
+      <p class="font-display text-4xl sm:text-5xl font-semibold text-accent"><span class="counter" data-target="10000">0</span>+</p>
+      <p class="text-white/50 text-sm mt-2 tracking-wide">Homes Automated</p>
+    </div>
+    <div class="reveal-scale">
+      <p class="font-display text-4xl sm:text-5xl font-semibold text-accent"><span class="counter" data-target="99">0</span>.9%</p>
+      <p class="text-white/50 text-sm mt-2 tracking-wide">System Uptime</p>
+    </div>
+    <div class="reveal-scale">
+      <p class="font-display text-4xl sm:text-5xl font-semibold text-accent"><span class="counter" data-target="24">0</span>/7</p>
+      <p class="text-white/50 text-sm mt-2 tracking-wide">Live Monitoring</p>
+    </div>
+    <div class="reveal-scale">
+      <p class="font-display text-4xl sm:text-5xl font-semibold text-accent"><span class="counter" data-target="50">0</span>+</p>
+      <p class="text-white/50 text-sm mt-2 tracking-wide">Device Integrations</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="relative py-28 sm:py-36 section-glow">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-2xl mb-16">
+      <p class="reveal text-xs tracking-[0.4em] text-accent uppercase mb-4">What We Build</p>
+      <h2 class="reveal font-display text-4xl sm:text-5xl font-semibold leading-tight">Engineered intelligence for modern living</h2>
+      <p class="reveal mt-5 text-white/55 text-lg">Five integrated systems, one seamless network — designed to make every home quietly, effortlessly smart.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <article class="reveal tilt-card group glass rounded-3xl p-8 lg:col-span-2">
+        <div class="w-14 h-14 rounded-2xl bg-accent/15 flex items-center justify-center text-accent mb-6">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3 class="font-display text-2xl font-semibold mb-3">Smart Security</h3>
+        <p class="text-white/55 leading-relaxed">Perimeter sensors, facial-recognition entry, and encrypted surveillance unified into a single command center — protecting your home before a threat ever reaches the door.</p>
+      </article>
+
+      <article class="reveal tilt-card group glass rounded-3xl p-8">
+        <div class="w-14 h-14 rounded-2xl bg-accent/15 flex items-center justify-center text-accent mb-6">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1a3 3 0 00-3 3v7a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8"/></svg>
+        </div>
+        <h3 class="font-display text-2xl font-semibold mb-3">Voice Automation</h3>
+        <p class="text-white/55 leading-relaxed">Natural language control over lighting, climate and entertainment — a single sentence commands the entire home.</p>
+      </article>
+
+      <article class="reveal tilt-card group glass rounded-3xl p-8">
+        <div class="w-14 h-14 rounded-2xl bg-accent/15 flex items-center justify-center text-accent mb-6">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg>
+        </div>
+        <h3 class="font-display text-2xl font-semibold mb-3">AI Home Assistant</h3>
+        <p class="text-white/55 leading-relaxed">A learning core that studies your routines and adapts — anticipating comfort settings before you ask.</p>
+      </article>
+
+      <article class="reveal tilt-card group glass rounded-3xl p-8">
+        <div class="w-14 h-14 rounded-2xl bg-accent/15 flex items-center justify-center text-accent mb-6">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>
+        </div>
+        <h3 class="font-display text-2xl font-semibold mb-3">Energy Management</h3>
+        <p class="text-white/55 leading-relaxed">Real-time consumption insights and automated load balancing — luxury that runs lighter on the grid.</p>
+      </article>
+
+      <article class="reveal tilt-card group glass rounded-3xl p-8 lg:col-span-2">
+        <div class="w-14 h-14 rounded-2xl bg-accent/15 flex items-center justify-center text-accent mb-6">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3 class="font-display text-2xl font-semibold mb-3">Remote Monitoring</h3>
+        <p class="text-white/55 leading-relaxed">Full visibility into every connected room from anywhere in the world, with instant alerts the moment something needs your attention.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGIES -->
+<section id="technologies" class="relative py-28 sm:py-36 border-t border-white/5">
+  <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+    <div class="reveal-left">
+      <p class="text-xs tracking-[0.4em] text-accent uppercase mb-4">Under the Hood</p>
+      <h2 class="font-display text-4xl sm:text-5xl font-semibold leading-tight mb-6">A network built on open, future-proof standards</h2>
+      <p class="text-white/55 text-lg mb-10">Every Bilaad system speaks the same language — regardless of brand, protocol, or generation of device.</p>
+
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <span class="w-11 h-11 shrink-0 rounded-xl bg-accent/15 flex items-center justify-center text-accent">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 000 18M3 12h18"/></svg>
+          </span>
+          <div>
+            <h3 class="font-semibold mb-1">Matter &amp; Thread Protocol</h3>
+            <p class="text-white/50 text-sm leading-relaxed">Universal compatibility across ecosystems — no walled gardens.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="w-11 h-11 shrink-0 rounded-xl bg-accent/15 flex items-center justify-center text-accent">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9z"/></svg>
+          </span>
+          <div>
+            <h3 class="font-semibold mb-1">Edge AI Processing</h3>
+            <p class="text-white/50 text-sm leading-relaxed">Decisions made locally, in milliseconds — not in a distant data center.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="w-11 h-11 shrink-0 rounded-xl bg-accent/15 flex items-center justify-center text-accent">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/></svg>
+          </span>
+          <div>
+            <h3 class="font-semibold mb-1">End-to-End Encryption</h3>
+            <p class="text-white/50 text-sm leading-relaxed">Every packet, camera feed and voice command secured in transit and at rest.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="w-11 h-11 shrink-0 rounded-xl bg-accent/15 flex items-center justify-center text-accent">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h16M4 6h16M4 18h16"/></svg>
+          </span>
+          <div>
+            <h3 class="font-semibold mb-1">Wi-Fi 7 &amp; 5G Connectivity</h3>
+            <p class="text-white/50 text-sm leading-relaxed">Bandwidth built for hundreds of simultaneous smart devices.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal-right relative">
+      <div class="img-zoom rounded-3xl overflow-hidden aspect-[4/5] glass">
+        <img src="https://picsum.photos/seed/bilaad-tech/900/1100" alt="Smart home control panel interface" class="w-full h-full object-cover duotone" loading="lazy" />
+      </div>
+      <div class="absolute -bottom-6 -left-6 glass rounded-2xl px-5 py-4 shadow-xl hidden sm:block">
+        <p class="text-xs text-white/50 mb-1">Network Status</p>
+        <p class="font-display font-semibold text-accent">All Systems Online</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients" class="relative py-28 sm:py-36 border-t border-white/5 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6 text-center mb-16">
+    <p class="reveal text-xs tracking-[0.4em] text-accent uppercase mb-4">Trusted By Discerning Homeowners</p>
+    <h2 class="reveal font-display text-5xl sm:text-6xl md:text-7xl font-semibold">OUR CLIENTS</h2>
+  </div>
+
+  <!-- horizontal gallery -->
+  <div class="relative mb-24">
+    <div class="marquee-track gap-6 px-6">
+      <div class="flex gap-6" id="gallery-set-a"></div>
+      <div class="flex gap-6" id="gallery-set-b" aria-hidden="true"></div>
+    </div>
+    <div class="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#080808] to-transparent"></div>
+    <div class="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#080808] to-transparent"></div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-6">
+    <blockquote class="reveal glass rounded-3xl p-8">
+      <div class="flex gap-1 text-accent mb-5" aria-hidden="true">★★★★★</div>
+      <p class="text-white/75 leading-relaxed mb-6">&ldquo;HomeWise transformed my home into an intelligent living experience.&rdquo;</p>
+      <footer class="flex items-center gap-3">
+        <img src="https://i.pravatar.cc/100?img=47" alt="Portrait of Sarah" class="w-11 h-11 rounded-full object-cover" loading="lazy" />
+        <div>
+          <p class="font-semibold text-sm">Sarah</p>
+          <p class="text-white/45 text-xs">Homeowner, Lekki</p>
+        </div>
+      </footer>
+    </blockquote>
+
+    <blockquote class="reveal glass rounded-3xl p-8">
+      <div class="flex gap-1 text-accent mb-5" aria-hidden="true">★★★★★</div>
+      <p class="text-white/75 leading-relaxed mb-6">&ldquo;The security system gives me total peace of mind whenever I travel.&rdquo;</p>
+      <footer class="flex items-center gap-3">
+        <img src="https://i.pravatar.cc/100?img=12" alt="Portrait of James" class="w-11 h-11 rounded-full object-cover" loading="lazy" />
+        <div>
+          <p class="font-semibold text-sm">James</p>
+          <p class="text-white/45 text-xs">Homeowner, Abuja</p>
+        </div>
+      </footer>
+    </blockquote>
+
+    <blockquote class="reveal glass rounded-3xl p-8">
+      <div class="flex gap-1 text-accent mb-5" aria-hidden="true">★★★★★</div>
+      <p class="text-white/75 leading-relaxed mb-6">&ldquo;Voice control makes my home feel truly alive — it just works.&rdquo;</p>
+      <footer class="flex items-center gap-3">
+        <img src="https://i.pravatar.cc/100?img=32" alt="Portrait of Amara" class="w-11 h-11 rounded-full object-cover" loading="lazy" />
+        <div>
+          <p class="font-semibold text-sm">Amara</p>
+          <p class="text-white/45 text-xs">Homeowner, Ikoyi</p>
+        </div>
+      </footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- CONTACT / CTA -->
+<section id="contact" class="relative py-28 sm:py-36 border-t border-white/5 section-glow">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="reveal glass rounded-[2.5rem] p-10 sm:p-16 text-center mb-20">
+      <h2 class="font-display text-4xl sm:text-5xl font-semibold mb-5">Ready to experience the future of living?</h2>
+      <p class="text-white/55 text-lg max-w-xl mx-auto mb-10">Start a free trial today, or talk to our team about designing an intelligent network for your home.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#signup" class="btn-accent font-semibold px-8 py-4 rounded-full w-full sm:w-auto">Get Free Trial</a>
+        <a href="#clients" class="btn-ghost glass font-medium px-8 py-4 rounded-full w-full sm:w-auto">Our Clients</a>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-16">
+      <div class="reveal-left">
+        <p class="text-xs tracking-[0.4em] text-accent uppercase mb-4">Get In Touch</p>
+        <h3 class="font-display text-3xl font-semibold mb-6">Let's design your intelligent home</h3>
+        <p class="text-white/55 mb-10 leading-relaxed">Our specialists respond within one business day. For urgent support, existing clients can reach the 24/7 monitoring desk directly.</p>
+
+        <ul class="space-y-5 text-sm">
+          <li class="flex items-center gap-4">
+            <span class="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center text-accent"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z" opacity="0"/><path d="M3 6l9 7 9-7M3 6v12h18V6"/></svg></span>
+            <span class="text-white/70">hello@bilaadnigeria.com</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center text-accent"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.6a16 16 0 006.4 6.4l1.1-1.1a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6A2 2 0 0122 16.9z"/></svg></span>
+            <span class="text-white/70">+234 800 000 0000</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center text-accent"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.1-7-11a7 7 0 0114 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+            <span class="text-white/70">Victoria Island, Lagos, Nigeria</span>
+          </li>
+        </ul>
+      </div>
+
+      <form id="contact-form" class="reveal-right glass rounded-3xl p-8 space-y-5" novalidate>
+        <div>
+          <label for="name" class="block text-xs tracking-widest text-white/50 mb-2 uppercase">Name</label>
+          <input id="name" name="name" type="text" required placeholder="Your full name" class="w-full rounded-xl px-4 py-3 text-sm" />
+        </div>
+        <div>
+          <label for="email" class="block text-xs tracking-widest text-white/50 mb-2 uppercase">Email</label>
+          <input id="email" name="email" type="email" required placeholder="you@example.com" class="w-full rounded-xl px-4 py-3 text-sm" />
+        </div>
+        <div>
+          <label for="message" class="block text-xs tracking-widest text-white/50 mb-2 uppercase">Message</label>
+          <textarea id="message" name="message" rows="4" required placeholder="Tell us about your home..." class="w-full rounded-xl px-4 py-3 text-sm resize-none"></textarea>
+        </div>
+        <button type="submit" class="btn-accent w-full font-semibold py-3.5 rounded-xl">Send Message</button>
+        <p id="form-status" class="text-sm text-center text-accent hidden" role="status">Thank you — our team will be in touch shortly.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="relative border-t border-white/5 pt-20 pb-8">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
+      <div class="col-span-2">
+        <a href="#home" class="flex items-center gap-2 mb-4">
+          <span class="w-9 h-9 rounded-full bg-accent/15 border border-accent/40 flex items-center justify-center font-display font-semibold text-accent">B</span>
+          <span class="font-display font-semibold tracking-wide">BILAAD REALTY</span>
+        </a>
+        <p class="text-white/45 text-sm max-w-xs leading-relaxed mb-6">Engineering intelligent, secure and effortless homes across Nigeria and beyond.</p>
+        <div class="flex gap-3">
+          <a href="#" aria-label="Bilaad Realty on X" class="btn-ghost w-10 h-10 rounded-full glass flex items-center justify-center"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.2 8.3L23 22h-6.6l-5.2-6.8L5 22H2l7.7-8.9L1 2h6.8l4.7 6.2L18.9 2zM17.7 20h1.8L6.5 3.9H4.6L17.7 20z"/></svg></a>
+          <a href="#" aria-label="Bilaad Realty on Instagram" class="btn-ghost w-10 h-10 rounded-full glass flex items-center justify-center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" aria-label="Bilaad Realty on LinkedIn" class="btn-ghost w-10 h-10 rounded-full glass flex items-center justify-center"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.9 3.9 6 2.5 6S0 4.9 0 3.5 1.1 1 2.5 1s2.48 1.1 2.48 2.5zM.5 8.5h4V23h-4V8.5zM8.5 8.5h3.8v2h.05c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.7c0-1.6-.03-3.66-2.23-3.66-2.24 0-2.58 1.75-2.58 3.55V23h-4V8.5z"/></svg></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-xs tracking-widest text-white/50 uppercase mb-5">Navigate</h4>
+        <ul class="space-y-3 text-sm text-white/65">
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#technologies" class="nav-link">Technologies</a></li>
+          <li><a href="#clients" class="nav-link">Our Clients</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xs tracking-widest text-white/50 uppercase mb-5">Services</h4>
+        <ul class="space-y-3 text-sm text-white/65">
+          <li><a href="#services" class="nav-link">Smart Security</a></li>
+          <li><a href="#services" class="nav-link">Voice Automation</a></li>
+          <li><a href="#services" class="nav-link">AI Home Assistant</a></li>
+          <li><a href="#services" class="nav-link">Energy Management</a></li>
+          <li><a href="#services" class="nav-link">Remote Monitoring</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
+      <p>&copy; <span id="year"></span> Bilaad Realty. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Mobile menu ---------- */
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuToggle.addEventListener('click', () => {
+    const isOpen = !mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    menuToggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  /* ---------- Cursor glow ---------- */
+  const glow = document.getElementById('cursor-glow');
+  if (!reducedMotion && window.matchMedia('(pointer: fine)').matches) {
+    const quickX = gsap.quickTo(glow, 'x', { duration: 0.5, ease: 'power3.out' });
+    const quickY = gsap.quickTo(glow, 'y', { duration: 0.5, ease: 'power3.out' });
+    window.addEventListener('mousemove', (e) => {
+      quickX(e.clientX);
+      quickY(e.clientY);
+    });
+  } else {
+    glow.style.display = 'none';
+  }
+
+  /* ---------- Tilt cards ---------- */
+  if (!reducedMotion) {
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        gsap.to(card, { rotateY: px * 10, rotateX: -py * 10, duration: 0.4, ease: 'power2.out', transformPerspective: 800 });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.6, ease: 'power3.out' });
+      });
+    });
+  }
+
+  /* ---------- GSAP entrance + scroll reveals ---------- */
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.timeline({ delay: 0.2 })
+    .to('#hero-eyebrow', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
+    .fromTo('#bracket-left', { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' }, '-=0.3')
+    .fromTo('#bracket-right', { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' }, '<')
+    .to('#hero-sub', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4')
+    .to('#hero-cta', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5');
+
+  document.querySelectorAll('.reveal').forEach((el) => {
+    if (el.closest('#home')) return;
+    gsap.to(el, {
+      opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 85%' }
+    });
+  });
+  document.querySelectorAll('.reveal-left').forEach((el) => {
+    gsap.to(el, {
+      opacity: 1, x: 0, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 82%' }
+    });
+  });
+  document.querySelectorAll('.reveal-right').forEach((el) => {
+    gsap.to(el, {
+      opacity: 1, x: 0, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 82%' }
+    });
+  });
+  document.querySelectorAll('.reveal-scale').forEach((el) => {
+    gsap.to(el, {
+      opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.6)',
+      scrollTrigger: { trigger: el, start: 'top 88%' }
+    });
+  });
+
+  /* Stagger the services cards */
+  gsap.utils.toArray('#services article').forEach((el, i) => {
+    gsap.fromTo(el, { opacity: 0, y: 60 }, {
+      opacity: 1, y: 0, duration: 0.8, delay: i * 0.06, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 88%' }
+    });
+  });
+
+  /* Hero parallax */
+  if (!reducedMotion) {
+    gsap.to('#home img', {
+      yPercent: 12,
+      ease: 'none',
+      scrollTrigger: { trigger: '#home', start: 'top top', end: 'bottom top', scrub: true }
+    });
+  }
+
+  /* Navbar shrink on scroll */
+  const header = document.querySelector('header');
+  ScrollTrigger.create({
+    start: 60,
+    end: 99999,
+    onUpdate: (self) => {
+      header.classList.toggle('scale-[.98]', self.scroll() > 60);
+    }
+  });
+
+  /* ---------- Counters ---------- */
+  document.querySelectorAll('.counter').forEach((el) => {
+    const target = parseFloat(el.dataset.target);
+    const obj = { val: 0 };
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 90%',
+      once: true,
+      onEnter: () => {
+        gsap.to(obj, {
+          val: target, duration: 2, ease: 'power2.out',
+          onUpdate: () => { el.textContent = Math.floor(obj.val).toLocaleString(); }
+        });
+      }
+    });
+  });
+
+  /* ---------- Client gallery marquee ---------- */
+  const galleryImages = [
+    'bilaad-g1','bilaad-g2','bilaad-g3','bilaad-g4','bilaad-g5','bilaad-g6'
+  ];
+  function buildGallery(containerId) {
+    const container = document.getElementById(containerId);
+    galleryImages.forEach((seed) => {
+      const fig = document.createElement('div');
+      fig.className = 'img-zoom w-72 sm:w-80 aspect-[4/3] rounded-3xl overflow-hidden glass shrink-0';
+      fig.innerHTML = `<img src="https://picsum.photos/seed/${seed}/700/525" alt="Luxury smart home showcase" class="w-full h-full object-cover duotone" loading="lazy" />`;
+      container.appendChild(fig);
+    });
+  }
+  buildGallery('gallery-set-a');
+  buildGallery('gallery-set-b');
+
+  /* ---------- Particles ---------- */
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  function initParticles() {
+    const count = Math.min(70, Math.floor(window.innerWidth / 20));
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.6 + 0.4,
+      speed: Math.random() * 0.4 + 0.1,
+      drift: (Math.random() - 0.5) * 0.3,
+      hue: Math.random() > 0.6 ? '255,107,53' : '255,255,255',
+      alpha: Math.random() * 0.4 + 0.15,
+    }));
+  }
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach((p) => {
+      p.y -= p.speed;
+      p.x += p.drift;
+      if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.hue},${p.alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(animateParticles);
+  }
+  resizeCanvas();
+  initParticles();
+  window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+  if (!reducedMotion) {
+    animateParticles();
+  } else {
+    canvas.style.display = 'none';
+  }
+
+  /* ---------- Contact form (static demo) ---------- */
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    status.classList.remove('hidden');
+    form.reset();
+    setTimeout(() => status.classList.add('hidden'), 5000);
+  });
+</script>
+
+</body>
+</html>
