@@ -1,0 +1,63 @@
+/**
+ * Reusable animation utility classes.
+ *
+ * Most motion on this site is one-shot (enter once, stay) and is handled by
+ * Framer Motion's `whileInView` (see components/animations/Reveal.tsx) —
+ * that's the right tool when a component needs to know *when* it animates.
+ * The utilities below are for the opposite case: continuous, decorative
+ * loops that never need JS to know their own state (a marquee, a pulsing
+ * scroll cue, an underline that grows on hover). Plain CSS keyframes are
+ * cheaper than a JS-driven timeline for those, and they keep working even
+ * if JavaScript is slow to hydrate.
+ */
+
+/* Infinite horizontal marquee, used by the project-name ticker strip.
+   The track renders the list twice back-to-back and slides exactly -50%,
+   so the loop point is invisible. Defined here (not Tailwind's config)
+   because it's paired with a duplicated-content contract in Ticker.tsx —
+   keeping them next to each other in one file makes that contract obvious. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 42s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* The falling-line "scroll" cue in the hero — a single bar tracks down a
+   fixed-height rail on loop, echoing springs.estate's own scroll affordance. */
+@keyframes scroll-cue {
+  to {
+    top: 52px;
+  }
+}
+.animate-scroll-cue {
+  animation: scroll-cue 2.2s infinite cubic-bezier(0.25, 0.74, 0.22, 0.99);
+}
+
+/* Underline-grow: a hairline that expands from 0 to full width on hover,
+   used for nav links. A utility class rather than repeated Tailwind
+   arbitrary-value soup keeps every nav-style link visually identical. */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.4s cubic-bezier(0.25, 0.74, 0.22, 0.99);
+}
+.link-underline:hover::after {
+  width: 100%;
+}

@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Continuous decorative-loop animations (marquee, scroll cue, link underline) —
+   see styles/animations.css for why these live outside Tailwind's config. */
+@import "../styles/animations.css";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream text-ink font-sans antialiased;
+}
+
+body.lock {
+  overflow: hidden;
+}
+
+@layer utilities {
+  .eyebrow {
+    @apply mb-4 inline-flex items-center gap-2.5 text-[0.72rem] font-bold uppercase tracking-[0.28em] text-gold-dark;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply inline-block h-px w-7 bg-gold;
+  }
+
+  .wrap {
+    @apply mx-auto max-w-[1280px] px-[6vw];
+  }
+}
+
+::selection {
+  background: #bc9633;
+  color: #1b1814;
+}
