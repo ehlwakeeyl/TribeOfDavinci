@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Bilaad Realty — Building Sustainable Cities</title>
+<meta name="description" content="Bilaad Realty designs homes built for more than just today — blending timeless architecture with eco-friendly features across 15 signature developments in Abuja, Nigeria.">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#bc9633;
+  --gold-light:#d9bd75;
+  --gold-dark:#8f721f;
+  --grey:#808080;
+  --charcoal:#1b1814;
+  --charcoal-2:#28241e;
+  --cream:#f7f2e8;
+  --cream-2:#efe6d3;
+  --white:#ffffff;
+  --ink:#221f1a;
+  --ink-soft:#5a5650;
+  --ease:cubic-bezier(.16,.84,.44,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Manrope',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body.lock{overflow:hidden}
+h1,h2,h3,h4,.serif{font-family:'Fraunces',serif;font-weight:400;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+ul{list-style:none}
+.wrap{max-width:1280px;margin:0 auto;padding:0 6vw}
+section{position:relative}
+.eyebrow{
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold-dark);font-weight:700;display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;
+}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--gold);display:inline-block}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:15px 30px;
+  border-radius:2px;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+  border:1px solid transparent;cursor:pointer;transition:all .5s var(--ease);white-space:nowrap;
+}
+.btn-gold{background:var(--gold);color:var(--charcoal)}
+.btn-gold:hover{background:var(--gold-dark);color:var(--white);transform:translateY(-2px)}
+.btn-line{border-color:currentColor}
+.btn-line:hover{background:currentColor;color:var(--charcoal)}
+.btn-line.on-dark:hover{color:var(--white);background:rgba(255,255,255,.12)}
+
+/* ---------- reveal animation ---------- */
+.reveal{opacity:0;transform:translateY(46px);transition:opacity 1s var(--ease),transform 1.1s var(--ease)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-scale{opacity:0;transform:scale(.92);transition:opacity 1s var(--ease),transform 1.1s var(--ease)}
+.reveal-scale.in{opacity:1;transform:scale(1)}
+.stagger > *{transition-delay:calc(var(--i,0)*120ms)}
+
+/* ---------- loader ---------- */
+#loader{
+  position:fixed;inset:0;background:var(--charcoal);z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .9s var(--ease),visibility .9s var(--ease);
+}
+#loader img{width:180px;filter:brightness(0) invert(1);opacity:0;animation:loaderFade 1.6s var(--ease) forwards}
+@keyframes loaderFade{0%{opacity:0;transform:scale(.9)}60%{opacity:1}100%{opacity:1;transform:scale(1)}}
+#loader.hide{opacity:0;visibility:hidden}
+
+/* ---------- header ---------- */
+header.site{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:26px 6vw;display:flex;align-items:center;justify-content:space-between;
+  transition:background .5s var(--ease),padding .5s var(--ease),box-shadow .5s var(--ease);
+}
+header.site.scrolled{
+  background:rgba(247,242,232,.92);backdrop-filter:blur(10px);
+  padding:16px 6vw;box-shadow:0 8px 30px rgba(0,0,0,.06);
+}
+header.site .logo img{height:26px;transition:filter .5s var(--ease)}
+header.site:not(.scrolled) .logo img{filter:brightness(0) invert(1)}
+nav.main-nav{display:flex;align-items:center;gap:38px}
+nav.main-nav a{
+  font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  color:var(--white);position:relative;padding-bottom:4px;transition:color .4s var(--ease);
+}
+header.site.scrolled nav.main-nav a{color:var(--ink)}
+nav.main-nav a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);transition:width .4s var(--ease)}
+nav.main-nav a:hover::after{width:100%}
+header.site .cta-wa{color:var(--white)}
+header.site.scrolled .cta-wa{color:var(--ink)}
+#burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;z-index:600}
+#burger span{width:26px;height:2px;background:var(--white);transition:all .4s var(--ease)}
+header.site.scrolled #burger span{background:var(--ink)}
+#burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+#burger.open span:nth-child(2){opacity:0}
+#burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ---------- hero ---------- */
+#hero{
+  height:100vh;min-height:640px;display:flex;align-items:flex-end;color:var(--white);overflow:hidden;
+}
+#hero .bg{
+  position:absolute;inset:-8% -2%;background-size:cover;background-position:center;
+  background-image:url('assets/images/hero-capri.jpg');will-change:transform;
+}
+#hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,13,.35) 0%,rgba(20,17,13,.35) 40%,rgba(20,17,13,.92) 100%)}
+#hero .inner{position:relative;z-index:2;padding:0 6vw 9vh;width:100%}
+#hero .kicker{font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-light);margin-bottom:22px;font-weight:700}
+#hero h1{font-size:clamp(2.6rem,7vw,6.4rem);line-height:.98;font-weight:300;max-width:16ch}
+#hero h1 em{font-style:italic;color:var(--gold-light)}
+#hero p{max-width:46ch;margin:26px 0 38px;font-size:1.05rem;color:rgba(255,255,255,.82);font-weight:300}
+#hero .actions{display:flex;gap:18px;flex-wrap:wrap}
+.scroll-cue{
+  position:absolute;bottom:28px;right:6vw;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:rgba(255,255,255,.75);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;
+}
+.scroll-cue .line{width:1px;height:52px;background:linear-gradient(rgba(255,255,255,.8),transparent);overflow:hidden;position:relative}
+.scroll-cue .line::after{content:"";position:absolute;top:-52px;left:0;width:100%;height:52px;background:var(--gold-light);animation:cue 2.2s infinite var(--ease)}
+@keyframes cue{to{top:52px}}
+
+/* ---------- ticker ---------- */
+.ticker-strip{background:var(--charcoal);color:var(--gold-light);padding:16px 0;overflow:hidden;white-space:nowrap;position:relative;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+.ticker-track{display:inline-flex;gap:48px;animation:ticker 42s linear infinite}
+.ticker-strip:hover .ticker-track{animation-play-state:paused}
+.ticker-track span{font-family:'Fraunces',serif;font-size:1rem;letter-spacing:.04em;font-style:italic;opacity:.85}
+.ticker-track span::after{content:"—";color:var(--gold);margin-left:48px;font-style:normal}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- mission ---------- */
+#mission{padding:150px 0 120px;background:var(--cream)}
+#mission .grid{display:grid;grid-template-columns:.9fr 1.4fr;gap:70px;align-items:start}
+#mission blockquote{font-size:clamp(1.6rem,3vw,2.5rem);font-weight:300;line-height:1.32;color:var(--ink)}
+#mission blockquote span{color:var(--gold-dark);font-style:italic}
+#mission cite{display:block;margin-top:30px;font-style:normal;font-size:.85rem;letter-spacing:.06em;color:var(--ink-soft)}
+#mission .side p{color:var(--ink-soft);font-size:1rem;margin-bottom:18px;font-weight:300}
+#mission .side strong{color:var(--ink);font-weight:600}
+
+/* ---------- advantage rows ---------- */
+#advantage{background:var(--charcoal);color:var(--white);padding:140px 0}
+#advantage .head{max-width:640px;margin-bottom:100px}
+#advantage .head h2{font-size:clamp(2.1rem,4.2vw,3.4rem);font-weight:300;color:var(--white)}
+#advantage .head p{color:rgba(255,255,255,.6);margin-top:22px;font-weight:300;font-size:1.02rem}
+.pillar{display:grid;grid-template-columns:70px 1fr 1fr;gap:50px;align-items:center;padding:52px 0;border-top:1px solid rgba(255,255,255,.12)}
+.pillar:last-child{border-bottom:1px solid rgba(255,255,255,.12)}
+.pillar .num{font-family:'Fraunces',serif;font-size:1.1rem;color:var(--gold)}
+.pillar h3{font-size:clamp(1.6rem,2.6vw,2.3rem);font-weight:300;color:var(--white)}
+.pillar p{color:rgba(255,255,255,.62);font-weight:300;font-size:.98rem;max-width:44ch}
+@media(max-width:860px){.pillar{grid-template-columns:1fr;gap:14px}}
+
+/* ---------- featured project ---------- */
+#featured{padding:150px 0;background:var(--cream)}
+#featured .layout{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:center;background:var(--white);box-shadow:0 40px 90px -30px rgba(30,25,15,.25)}
+#featured .media{position:relative;height:100%;min-height:520px;overflow:hidden}
+#featured .media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+#featured .layout:hover .media img{transform:scale(1.06)}
+#featured .media .tag{position:absolute;top:28px;left:28px;background:var(--gold);color:var(--charcoal);padding:9px 18px;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+#featured .content{padding:70px 60px}
+#featured .content h2{font-size:clamp(2rem,3.4vw,3rem);font-weight:300;margin-bottom:6px}
+#featured .content .place{color:var(--ink-soft);font-size:.85rem;letter-spacing:.05em;margin-bottom:26px}
+#featured .content p.lead{font-size:1.02rem;color:var(--ink-soft);font-weight:300;margin-bottom:32px}
+.stat-row{display:flex;gap:40px;margin-bottom:36px;flex-wrap:wrap}
+.stat-row .stat b{display:block;font-family:'Fraunces',serif;font-size:2rem;color:var(--gold-dark);font-weight:400}
+.stat-row .stat span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.unit-chip-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.unit-chip{border:1px solid #ddd3ba;padding:8px 16px;font-size:.78rem;letter-spacing:.03em;border-radius:20px;color:var(--ink-soft)}
+@media(max-width:900px){#featured .layout{grid-template-columns:1fr}#featured .media{min-height:340px}#featured .content{padding:44px 30px}}
+
+/* ---------- stats band ---------- */
+#statsband{background:var(--gold);padding:70px 0}
+#statsband .row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+#statsband .item b{display:block;font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,3.2rem);color:var(--charcoal);font-weight:400}
+#statsband .item span{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(27,24,20,.72);font-weight:700}
+@media(max-width:760px){#statsband .row{grid-template-columns:repeat(2,1fr);row-gap:40px}}
+
+/* ---------- projects grid ---------- */
+#projects{padding:150px 0}
+#projects .head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:70px;flex-wrap:wrap}
+#projects .head h2{font-size:clamp(2.1rem,4.2vw,3.4rem);font-weight:300;max-width:16ch}
+#projects .head p{color:var(--ink-soft);max-width:38ch;font-weight:300}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+.pcard{cursor:pointer;position:relative}
+.pcard .thumb{position:relative;height:340px;overflow:hidden;background:#e9e0cb}
+.pcard .thumb img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease),filter 1s var(--ease)}
+.pcard:hover .thumb img{transform:scale(1.09);filter:brightness(.8)}
+.pcard .thumb::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,17,13,.75) 0%,transparent 55%);z-index:1;opacity:0;transition:opacity .5s var(--ease)}
+.pcard:hover .thumb::before{opacity:1}
+.pcard .view{
+  position:absolute;left:24px;bottom:24px;z-index:2;color:var(--white);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  display:flex;align-items:center;gap:10px;opacity:0;transform:translateY(10px);transition:all .5s var(--ease);font-weight:700;
+}
+.pcard:hover .view{opacity:1;transform:translateY(0)}
+.pcard .meta{padding:22px 2px}
+.pcard .meta .loc{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dark);font-weight:700;margin-bottom:8px}
+.pcard .meta h3{font-size:1.5rem;font-weight:400}
+.pcard .meta .units{font-size:.82rem;color:var(--ink-soft);margin-top:6px}
+@media(max-width:980px){.pgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.pgrid{grid-template-columns:1fr}}
+
+/* ---------- trust / SDG ---------- */
+#trust{padding:150px 0;background:var(--charcoal-2);color:var(--white);overflow:hidden}
+#trust .layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+#trust .layout img{width:100%;height:480px;object-fit:cover}
+#trust h2{font-size:clamp(2rem,3.6vw,3rem);font-weight:300;margin-bottom:24px}
+#trust p{color:rgba(255,255,255,.62);font-weight:300;margin-bottom:20px;font-size:1rem}
+#trust .badges{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+#trust .badges span{border:1px solid rgba(255,255,255,.25);padding:9px 16px;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light)}
+@media(max-width:900px){#trust .layout{grid-template-columns:1fr}#trust .layout img{height:320px}}
+
+/* ---------- cta banner ---------- */
+#ctabanner{padding:0}
+#ctabanner .row{display:grid;grid-template-columns:1fr 1fr}
+#ctabanner .cell{padding:110px 6vw;position:relative;overflow:hidden;color:var(--white)}
+#ctabanner .cell.vendor{background:linear-gradient(155deg,#241f18,#3a3123)}
+#ctabanner .cell.affiliate{background:linear-gradient(155deg,#8f721f,#bc9633)}
+#ctabanner .cell h3{font-size:clamp(1.7rem,2.8vw,2.4rem);font-weight:300;margin-bottom:16px}
+#ctabanner .cell p{max-width:36ch;font-weight:300;opacity:.85;margin-bottom:32px}
+@media(max-width:820px){#ctabanner .row{grid-template-columns:1fr}}
+
+/* ---------- contact ---------- */
+#contact{padding:150px 0;background:var(--cream)}
+#contact .layout{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+#contact h2{font-size:clamp(2.1rem,4vw,3.2rem);font-weight:300;margin-bottom:24px}
+#contact .lead{color:var(--ink-soft);font-weight:300;margin-bottom:44px;max-width:42ch}
+.info-row{display:flex;gap:20px;padding:22px 0;border-top:1px solid #ddd3ba}
+.info-row:last-of-type{border-bottom:1px solid #ddd3ba}
+.info-row .k{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dark);font-weight:700;width:120px;flex-shrink:0}
+.info-row .v{font-weight:400}
+.social-row{display:flex;gap:16px;margin-top:36px}
+.social-row a{width:44px;height:44px;border:1px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .4s var(--ease);font-size:.85rem}
+.social-row a:hover{background:var(--charcoal);color:var(--white);border-color:var(--charcoal);transform:translateY(-3px)}
+form.contact-form{display:grid;gap:18px;background:var(--white);padding:48px;box-shadow:0 30px 70px -30px rgba(30,25,15,.2)}
+form.contact-form .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+form.contact-form label{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px;display:block;font-weight:700}
+form.contact-form input,form.contact-form select,form.contact-form textarea{
+  width:100%;border:0;border-bottom:1px solid #d8cfb8;background:transparent;padding:10px 2px;font-family:inherit;font-size:.95rem;color:var(--ink);transition:border-color .3s var(--ease);
+}
+form.contact-form input:focus,form.contact-form select:focus,form.contact-form textarea:focus{outline:0;border-color:var(--gold)}
+form.contact-form textarea{resize:vertical;min-height:90px}
+form.contact-form .hint{font-size:.72rem;color:var(--ink-soft);margin-top:-8px}
+@media(max-width:900px){#contact .layout{grid-template-columns:1fr}form.contact-form .two{grid-template-columns:1fr}}
+
+/* ---------- footer ---------- */
+footer.site{background:var(--charcoal);color:rgba(255,255,255,.65);padding:100px 0 40px}
+footer.site .top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:50px;padding-bottom:70px}
+footer.site .logo img{height:26px;filter:brightness(0) invert(1);margin-bottom:22px}
+footer.site .top p{font-weight:300;max-width:34ch;font-size:.92rem}
+footer.site h4{color:var(--white);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;font-weight:700}
+footer.site ul li{margin-bottom:13px}
+footer.site ul a{font-size:.9rem;font-weight:300;transition:color .3s var(--ease)}
+footer.site ul a:hover{color:var(--gold-light)}
+footer.site .bottom{display:flex;justify-content:space-between;align-items:center;padding-top:34px;border-top:1px solid rgba(255,255,255,.1);font-size:.78rem;flex-wrap:wrap;gap:14px}
+@media(max-width:900px){footer.site .top{grid-template-columns:1fr 1fr;row-gap:44px}}
+
+/* ---------- modal ---------- */
+#pmodal{position:fixed;inset:0;z-index:900;visibility:hidden;opacity:0;transition:opacity .5s var(--ease),visibility .5s var(--ease)}
+#pmodal.open{visibility:visible;opacity:1}
+#pmodal .backdrop{position:absolute;inset:0;background:rgba(15,13,10,.78);backdrop-filter:blur(4px)}
+#pmodal .sheet{
+  position:absolute;top:4vh;left:50%;transform:translate(-50%,26px);width:min(920px,90vw);max-height:92vh;overflow:auto;
+  background:var(--cream);transition:transform .55s var(--ease);box-shadow:0 60px 120px rgba(0,0,0,.5);
+}
+#pmodal.open .sheet{transform:translate(-50%,0)}
+#pmodal .m-img{height:340px;position:relative;overflow:hidden}
+#pmodal .m-img img{width:100%;height:100%;object-fit:cover}
+#pmodal .m-close{position:absolute;top:20px;right:20px;width:42px;height:42px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;border:0;font-size:1.1rem;cursor:pointer;z-index:3;display:flex;align-items:center;justify-content:center;transition:background .3s var(--ease)}
+#pmodal .m-close:hover{background:var(--gold);color:var(--charcoal)}
+#pmodal .m-body{padding:46px 50px 54px}
+#pmodal .m-body .loc{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dark);font-weight:700;margin-bottom:10px}
+#pmodal .m-body h2{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:300;margin-bottom:8px}
+#pmodal .m-body .tag{color:var(--ink-soft);font-style:italic;font-family:'Fraunces',serif;margin-bottom:26px;font-size:1.05rem}
+#pmodal .m-body p.desc{font-weight:300;color:var(--ink-soft);margin-bottom:30px}
+#pmodal .m-stats{display:flex;gap:36px;margin-bottom:30px;flex-wrap:wrap}
+#pmodal .m-stats div b{display:block;font-family:'Fraunces',serif;font-size:1.7rem;color:var(--gold-dark);font-weight:400}
+#pmodal .m-stats div span{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+#pmodal .m-units{display:grid;gap:14px;margin-bottom:34px}
+#pmodal .m-units .u{border:1px solid #ddd3ba;padding:16px 20px}
+#pmodal .m-units .u b{font-family:'Fraunces',serif;font-weight:500;color:var(--ink);display:block;margin-bottom:6px}
+#pmodal .m-units .u span{font-size:.9rem;color:var(--ink-soft);font-weight:300}
+#pmodal .m-actions{display:flex;gap:14px;flex-wrap:wrap}
+@media(max-width:600px){#pmodal .m-body{padding:34px 24px 40px}#pmodal .m-img{height:220px}}
+
+/* ---------- mobile nav ---------- */
+@media(max-width:900px){
+  #burger{display:flex}
+  nav.main-nav{
+    position:fixed;top:0;right:0;height:100vh;width:min(340px,84vw);background:var(--charcoal);
+    flex-direction:column;justify-content:center;align-items:flex-start;gap:26px;padding:0 40px;
+    transform:translateX(100%);transition:transform .55s var(--ease);z-index:550;
+  }
+  nav.main-nav.open{transform:translateX(0)}
+  nav.main-nav a{color:var(--white)!important;font-size:.95rem}
+  header.site .cta-wa{display:none}
+}
+.back-top{
+  position:fixed;bottom:28px;right:28px;width:50px;height:50px;border-radius:50%;background:var(--charcoal);color:var(--white);
+  display:flex;align-items:center;justify-content:center;z-index:400;cursor:pointer;opacity:0;pointer-events:none;
+  transition:opacity .4s var(--ease),transform .4s var(--ease),background .4s var(--ease);
+}
+.back-top.show{opacity:1;pointer-events:auto}
+.back-top:hover{background:var(--gold);transform:translateY(-4px)}
+</style>
+</head>
+<body class="lock">
+
+<div id="loader"><img src="assets/images/logo.png" alt=""></div>
+
+<header class="site" id="siteHeader">
+  <a href="#hero" class="logo"><img src="assets/images/logo.png" alt="Bilaad Realty"></a>
+  <nav class="main-nav" id="mainNav">
+    <a href="#advantage" class="nav-link">The Advantage</a>
+    <a href="#projects" class="nav-link">Our Projects</a>
+    <a href="#trust" class="nav-link">Sustainability</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <a href="https://vendor.bilaadnigeria.com/" class="nav-link" target="_blank" rel="noopener">Become a Vendor</a>
+    <a href="https://wa.me/2349133423363" target="_blank" rel="noopener" class="cta-wa nav-link">WhatsApp Us →</a>
+  </nav>
+  <button id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+
+<main>
+
+  <section id="hero">
+    <div class="bg" id="heroBg"></div>
+    <div class="inner">
+      <div class="kicker reveal in">Building Sustainable Cities</div>
+      <h1 class="reveal in">For those who dream <em>in colour.</em></h1>
+      <p class="reveal in">Homes designed for more than just today. Bilaad Realty blends timeless architecture with eco-friendly features across 15 signature developments in Abuja — spaces built for exceptional living and strong returns.</p>
+      <div class="actions reveal in">
+        <a href="#projects" class="btn btn-gold">Explore Our Projects</a>
+        <a href="#featured" class="btn btn-line on-dark">Project of the Month</a>
+      </div>
+    </div>
+    <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+  </section>
+
+  <div class="ticker-strip">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <section id="mission">
+    <div class="wrap grid">
+      <div>
+        <blockquote class="reveal">“The roadmap to sustainable living is inevitably an <span>interesting journey</span> — it serves as a template for all our endeavours.”
+          <cite>Dr. Emmanuel Bassi Usman — Chief Executive Officer, Bilaad Realty</cite>
+        </blockquote>
+      </div>
+      <div class="side reveal">
+        <p><strong>Bilaad Realty</strong> is a Nigerian real estate development firm shaping sustainable communities across the residential, commercial and industrial sectors.</p>
+        <p>Our approach is a dialogue between people, place and purpose — structures rooted in sustainability, guided by vision, and delivered through alternative financing, strategic partnerships and streamlined value chains for the cities of the future.</p>
+        <p>Through <strong>advisory services</strong>, we pair deep industry knowledge with client-focused strategy to deliver profitable, well-managed developments from concept to completion.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="advantage">
+    <div class="wrap">
+      <div class="head reveal">
+        <div class="eyebrow">The Bilaad Advantage</div>
+        <h2>Every detail, built with the future in mind.</h2>
+        <p>From prime locations that connect you to what matters, to communities engineered for comfort, security and sustainability — this is the standard behind every Bilaad address.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar reveal">
+          <div class="num">01</div>
+          <h3>Prime Locations</h3>
+          <p>Every estate sits within Abuja's most sought-after districts — Lifecamp, Maitama, Katampe, Jabi, Wuye, Gwarinpa and Mabushi — minutes from the city centre, airport road and everyday conveniences.</p>
+        </div>
+        <div class="pillar reveal">
+          <div class="num">02</div>
+          <h3>Timeless Architecture</h3>
+          <p>Designed with renowned architectural partners, each home balances bold contemporary form with interiors built for real, everyday family life.</p>
+        </div>
+        <div class="pillar reveal">
+          <div class="num">03</div>
+          <h3>Sustainable by Design</h3>
+          <p>Solar-powered street lighting, alternative power supply, automated sprinkler systems and centralised gas networks — engineered to reduce cost of living and environmental impact.</p>
+        </div>
+        <div class="pillar reveal">
+          <div class="num">04</div>
+          <h3>Smart & Secure Communities</h3>
+          <p>24/7 CCTV surveillance, automated gate access control, intercom systems and high-speed fibre-optic connectivity across every estate we build.</p>
+        </div>
+        <div class="pillar reveal">
+          <div class="num">05</div>
+          <h3>Strong Returns</h3>
+          <p>Backed by investment advisory and project management expertise, every Bilaad home is structured to deliver exceptional living and dependable returns on investment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="featured">
+    <div class="wrap">
+      <div class="eyebrow reveal">Project of the Month</div>
+      <div class="layout reveal-scale">
+        <div class="media">
+          <span class="tag">Now Selling</span>
+          <img src="assets/images/hero-capri-2.jpg" alt="Capri Island by Bilaad" loading="lazy">
+        </div>
+        <div class="content">
+          <h2>Capri Island</h2>
+          <div class="place">Lifecamp, Abuja FCT</div>
+          <p class="lead">More than just a place to live, Capri Island is a lifestyle destination — an exclusive haven where every detail is tailored to meet the highest standards of living.</p>
+          <div class="stat-row">
+            <div class="stat"><b>87</b><span>Exclusive Homes</span></div>
+            <div class="stat"><b>3.04</b><span>Hectare Estate</span></div>
+            <div class="stat"><b>3</b><span>House Types</span></div>
+          </div>
+          <div class="unit-chip-row">
+            <span class="unit-chip">The Aquamarine — 5 Bed Villa</span>
+            <span class="unit-chip">The Citrine — 4 Bed Townhouse</span>
+            <span class="unit-chip">The Aventurine — 3 Bed Home</span>
+          </div>
+          <div class="actions">
+            <a href="https://www.bilaadnigeria.com/capri-island/" target="_blank" rel="noopener" class="btn btn-gold">Download Brochure</a>
+            <a href="https://wa.me/2349133423363?text=Hi%2C%20I%27m%20interested%20in%20Capri%20Island." target="_blank" rel="noopener" class="btn btn-line">Get The Bilaad Advantage</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="statsband">
+    <div class="wrap row">
+      <div class="item reveal"><b data-count="15">0</b><span>Signature Developments</span></div>
+      <div class="item reveal"><b data-count="1389">0</b><span>Homes Designed</span></div>
+      <div class="item reveal"><b data-count="8">0</b><span>Prime Districts, Abuja FCT</span></div>
+      <div class="item reveal"><b data-count="100">0</b><span>% Sustainability Focused</span></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="head reveal">
+        <div>
+          <div class="eyebrow">Our Projects</div>
+          <h2>Fifteen destinations. One standard of living.</h2>
+        </div>
+        <p>Each Bilaad development takes its name and spirit from the world's most desirable islands — reimagined as secure, sustainable communities across Abuja.</p>
+      </div>
+      <div class="pgrid stagger" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <section id="trust">
+    <div class="wrap layout">
+      <img src="assets/images/proj-borabora.jpg" class="reveal" alt="Bilaad sustainable community" loading="lazy">
+      <div class="reveal">
+        <div class="eyebrow">Bilaad Development Trust</div>
+        <h2>Corporate values, translated into community action.</h2>
+        <p>Through the Bilaad Development Trust, we advance sustainability initiatives aligned with the UN Sustainable Development Goals 2030 — turning our commitment to people and planet into measurable, community-focused impact.</p>
+        <p>Every estate we deliver is a step toward the sustainable cities of tomorrow: energy-conscious, community-driven and built to last.</p>
+        <div class="badges">
+          <span>SDG 2030 Aligned</span>
+          <span>Alternative Power</span>
+          <span>Green Landscaping</span>
+          <span>Community First</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ctabanner">
+    <div class="row">
+      <div class="cell vendor reveal">
+        <h3>Become a Vendor</h3>
+        <p>Partner with Bilaad Realty and grow your business alongside Nigeria's fastest-rising sustainable developer.</p>
+        <a href="https://vendor.bilaadnigeria.com/" target="_blank" rel="noopener" class="btn btn-line on-dark">Get Started</a>
+      </div>
+      <div class="cell affiliate reveal">
+        <h3>Become an Affiliate</h3>
+        <p>Earn commission introducing clients to Bilaad's signature island-inspired developments across Abuja.</p>
+        <a href="https://bilaadnigeria.com/become-an-affiliate/" target="_blank" rel="noopener" class="btn btn-line on-dark">Join The Programme</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap layout">
+      <div class="reveal">
+        <div class="eyebrow">Get In Touch</div>
+        <h2>Let's build your next address.</h2>
+        <p class="lead">Book a tour, request a brochure, or speak with our advisory team — we're here to help you find the right Bilaad home.</p>
+
+        <div class="info-row">
+          <div class="k">Visit</div>
+          <div class="v">No 47 ML Wushishi Crescent, Utako, Abuja<br>Adjacent CBN Quarters</div>
+        </div>
+        <div class="info-row">
+          <div class="k">Call</div>
+          <div class="v"><a href="tel:+2347002222111">(+234) 700-222-2111</a></div>
+        </div>
+        <div class="info-row">
+          <div class="k">WhatsApp</div>
+          <div class="v"><a href="https://wa.me/2349133423363" target="_blank" rel="noopener">+234 913 342 3363</a></div>
+        </div>
+
+        <div class="social-row">
+          <a href="https://www.facebook.com/BilaadRealty" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+          <a href="https://twitter.com/BilaadRealty" target="_blank" rel="noopener" aria-label="Twitter/X">x</a>
+          <a href="https://www.instagram.com/bilaadrealty" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+          <a href="https://vendor.bilaadnigeria.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+
+      <form class="contact-form reveal" id="contactForm">
+        <div class="two">
+          <div>
+            <label for="fname">First Name</label>
+            <input id="fname" type="text" placeholder="Your first name" required>
+          </div>
+          <div>
+            <label for="lname">Last Name</label>
+            <input id="lname" type="text" placeholder="Your last name" required>
+          </div>
+        </div>
+        <div class="two">
+          <div>
+            <label for="email">Email Address</label>
+            <input id="email" type="email" placeholder="you@email.com" required>
+          </div>
+          <div>
+            <label for="phone">Phone Number</label>
+            <input id="phone" type="tel" placeholder="+234">
+          </div>
+        </div>
+        <div>
+          <label for="inquiry">Inquiry Type</label>
+          <select id="inquiry">
+            <option>Customer Support</option>
+            <option>Book a Tour</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" maxlength="180" placeholder="How can we help? (max 180 characters)"></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap top">
+    <div>
+      <div class="logo"><img src="assets/images/logo.png" alt="Bilaad Realty"></div>
+      <p>Sustainable cities, built with the future in mind. Blending timeless architecture with eco-friendly features across Abuja, Nigeria.</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#advantage">The Advantage</a></li>
+        <li><a href="#projects">Our Projects</a></li>
+        <li><a href="#trust">Sustainability</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Partner With Us</h4>
+      <ul>
+        <li><a href="https://vendor.bilaadnigeria.com/" target="_blank" rel="noopener">Become a Vendor</a></li>
+        <li><a href="https://bilaadnigeria.com/become-an-affiliate/" target="_blank" rel="noopener">Become an Affiliate</a></li>
+        <li><a href="https://www.bilaadnigeria.com/blog/" target="_blank" rel="noopener">Blog</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li>No 47 ML Wushishi Crescent, Utako, Abuja</li>
+        <li><a href="tel:+2347002222111">(+234) 700-222-2111</a></li>
+        <li><a href="https://wa.me/2349133423363" target="_blank" rel="noopener">WhatsApp Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap bottom">
+    <span>© 2026 Bilaad Realty. All rights reserved.</span>
+    <span>Designed for sustainable living.</span>
+  </div>
+</footer>
+
+<div class="back-top" id="backTop" aria-label="Back to top">↑</div>
+
+<div id="pmodal">
+  <div class="backdrop" data-close></div>
+  <div class="sheet">
+    <div class="m-img">
+      <button class="m-close" data-close>&times;</button>
+      <img id="mImg" src="" alt="">
+    </div>
+    <div class="m-body">
+      <div class="loc" id="mLoc"></div>
+      <h2 id="mName"></h2>
+      <div class="tag" id="mTag"></div>
+      <p class="desc" id="mDesc"></p>
+      <div class="m-stats" id="mStats"></div>
+      <div class="m-units" id="mUnits"></div>
+      <div class="m-actions">
+        <a id="mBrochure" href="#" target="_blank" rel="noopener" class="btn btn-gold">Download Brochure</a>
+        <a id="mWhatsapp" href="#" target="_blank" rel="noopener" class="btn btn-line">Enquire on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const projects = [
+  {name:"Amazon", loc:"Maitama, Abuja", img:"proj-amazon.jpg", tag:"An exclusive enclave of just 20 impeccably designed homes",
+   desc:"The Amazon blends spacious interiors with serene outdoor spaces — landscaped recreational areas, pedestrian-friendly walkways, solar-powered street lights, automated sprinklers, fibre-optic connectivity, 24/7 CCTV surveillance and automated gate access.",
+   units:20, land:null, url:"https://www.bilaadnigeria.com/the-amazon-by-bilaad/",
+   types:[["Peridot","Six-bedroom twin villa with a rooftop terrace and sleek, modern design elements."]]},
+
+  {name:"Bahamas", loc:"Maitama II, Abuja", img:"proj-bahamas.jpg", tag:"One of the most picturesque streets in the FCT",
+   desc:"Bilaad Realty's largest development — a secure, serene environment across nine distinct residence types, from five-bedroom villas to studio apartments, suited for every stage of family life.",
+   units:505, land:"11.37 Ha", url:"https://www.bilaadnigeria.com/the-bahamas-by-bilaad/",
+   types:[["Onyx","5-bed villa with employee quarters"],["Amethyst","4-bed twin villa"],["Opal","4-bed townhouse"],["Petalite / Ammolite","2-bed apartment & penthouse"],["Fluorite / Azurite / Iolite","2 & 1-bed apartments"],["Jadeite","Studio apartment"]]},
+
+  {name:"Bimini", loc:"Ministers' Quarters, Mabushi", img:"proj-bimini.jpg", tag:"Quiet sophistication in the heart of Abuja",
+   desc:"Just 8 limited-edition townhouses named The Pearl, tucked within the prestigious Ministers' Quarters — privacy, quality and timeless design in a secure, connected community.",
+   units:8, land:null, url:"https://www.bilaadnigeria.com/bimini/",
+   types:[["The Pearl","Four-bedroom townhouse with spacious en-suite bedrooms, dedicated maid's quarters and premium finishes."]]},
+
+  {name:"Bali Island", loc:"Life Camp, Abuja", img:"proj-bali-island.jpg", tag:"An exciting and dynamic new way to live",
+   desc:"A mid-premium estate across seven distinct home types, featuring innovative home automation, lush landscaped lawns and expansive open areas for an active, family-friendly lifestyle.",
+   units:412, land:null, url:"https://www.bilaadnigeria.com/bali-island-by-bilaad/",
+   types:[["Sapphire","5-bed villa"],["Amethyst / Opal","4-bed townhouses"],["Topaz","3-bed apartment"],["Aventurine / Ametrine","2-bed apartments"],["Vermarine","1-bed apartment"]]},
+
+  {name:"Bali Grove", loc:"Kafe District, Abuja FCT", img:"proj-bali-grove.png", tag:"Modern living in a serene, secure environment",
+   desc:"An exclusive residential development of 25 meticulously crafted homes blending contemporary architecture, comfort and functionality.",
+   units:25, land:"9,478 sqm", url:"https://www.bilaadnigeria.com/bali-grove/",
+   types:[["Onyx Villa","5-bed with employee quarters"],["Opal Townhouse","4-bed with staff quarter"]]},
+
+  {name:"Barbados Island", loc:"Abuja FCT", img:"proj-barbados.png", tag:"Where a breathtaking landscape meets architectural brilliance",
+   desc:"Vibrant, colourful gardens surround 24 five-bedroom villas with employee quarters — a perfect blend of creativity and craftsmanship.",
+   units:24, land:null, url:"https://www.bilaadnigeria.com/barbados-by-bilaad/",
+   types:[["Onyx","Five en-suite bedrooms, employee quarters, expansive kitchen and balcony with landscape views."]]},
+
+  {name:"Bobowasi Island", loc:"Jabi, Abuja", img:"proj-bobowasi.jpg", tag:"A vibrant, sustainable community",
+   desc:"40 exclusive Garnet Homes with 24-hour CCTV surveillance, a fully equipped gym, swimming pool, children's play area, fibre-optic internet, centralised gas network, alternative power supply and ample green spaces.",
+   units:40, land:null, url:"https://www.bilaadnigeria.com/bobowasi-by-bilaad/",
+   types:[["The Garnet","Stylish four-bedroom home offering a refined blend of comfort and modern design."]]},
+
+  {name:"Bora Bora Island", loc:"Wuye, Abuja", img:"proj-borabora.jpg", tag:"A premium sustainable estate in Wuye",
+   desc:"63 elegant homes combining smart-home automation with energy efficiency — a gym, adult and children's pools, fibre-optic internet, alternative power and landscaped green spaces, minutes from the city centre and airport.",
+   units:63, land:null, url:"https://www.bilaadnigeria.com/7622-2/",
+   types:[["Sapphire","5-bed villa with employee quarter"],["Ruby","4-bed townhouse"],["Topaz","3-bed apartment"]]},
+
+  {name:"Capri Island", loc:"Lifecamp, Abuja", img:"proj-capri-card.png", tag:"For those who dream in colour — Project of the Month",
+   desc:"More than just a place to live, Capri Island is a lifestyle destination — an exclusive haven across three distinct house types tailored to the highest standards of living.",
+   units:87, land:"3.04 Ha", url:"https://www.bilaadnigeria.com/capri-island/",
+   types:[["The Aquamarine","5-bed detached villa"],["The Citrine","4-bed townhouse"],["The Aventurine","3-bed home"]]},
+
+  {name:"Fiji Island", loc:"Jabi, Abuja", img:"proj-fiji.jpg", tag:"Refined taste, a love for comfort",
+   desc:"18 spacious stand-alone Sapphire homes equipped with state-of-the-art intelligent home features, redefining modern family living.",
+   units:18, land:"1 Ha", url:"https://www.bilaadnigeria.com/fiji-by-bilaad/",
+   types:[["Sapphire","Five-bedroom villa with an employee quarter across two elegant suspended floors."]]},
+
+  {name:"Langkawi Island", loc:"Katampe Layout, Abuja", img:"proj-langkawi.jpg", tag:"103 thoughtfully crafted homes",
+   desc:"From elegant five-bedroom villas to stylish two- and three-bedroom apartments, every unit is designed for comfort, functionality and sophistication amid serene, secure surroundings.",
+   units:103, land:"2.63 Ha", url:"https://www.bilaadnigeria.com/langkawi-by-bilaad/",
+   types:[["Onyx","5-bed villa"],["Opal","4-bed townhouse"],["Topaz / Aventurine","3-bed apartments"],["Ametrine","2-bed apartment"]]},
+
+  {name:"Maldives", loc:"Gwarinpa II, Abuja FCT", img:"proj-maldives.jpg", tag:"High taste, an appeal for comfort",
+   desc:"19 spacious stand-alone Onyx homes in a secure, serene environment, each designed for a tranquil living experience.",
+   units:19, land:"1.29 Ha", url:"https://www.bilaadnigeria.com/maldives-by-bilaad/",
+   types:[["Onyx","Five en-suite bedrooms with employee quarters, an expansive kitchen and a balcony overlooking the landscape."]]},
+
+  {name:"Mauritius Island", loc:"Ministers' Quarters, Mabushi", img:"proj-mauritius.jpg", tag:"A distinguished golf estate",
+   desc:"30 meticulously crafted homes across two signature residences, with a private amphitheatre and tranquil views of the estate's lush fairways — where elegance meets experience.",
+   units:30, land:null, url:"https://www.bilaadnigeria.com/mauritius/",
+   types:[["The Platinum","5-bed villa with maid's quarters"],["The Peridot","5-bed twin villa with guest chalet"]]},
+
+  {name:"Seychelles", loc:"Jabi District, Abuja", img:"proj-seychelles.jpg", tag:"Where nature and luxury coexist",
+   desc:"A serene enclave of 8 exquisite five-bedroom Amber homes surrounded by greenery, with captivating lake views for a refined, eco-conscious lifestyle.",
+   units:8, land:"4,692 sqm", url:"https://www.bilaadnigeria.com/seychelles/",
+   types:[["The Amber","Five-bedroom residence with lounges on every floor, flexible rooms and a charming terrace."]]},
+
+  {name:"Zanzibar", loc:"Jabi District, Abuja", img:"proj-zanzibar.png", tag:"Spacious, upscale living",
+   desc:"A Premium Plus estate of 27 limited-edition five-bedroom residences, setting a new benchmark in design and comfort with modern architecture and high-end finishes.",
+   units:27, land:null, url:"https://www.bilaadnigeria.com/zanzibar/",
+   types:[["The Emerald","Five-bedroom villa with staff quarters, a guest chalet and a terrace opening to breathtaking views."]]},
+];
+
+/* build grid */
+const grid = document.getElementById('projectsGrid');
+projects.forEach((p,i)=>{
+  const el = document.createElement('div');
+  el.className = 'pcard reveal';
+  el.style.setProperty('--i', i%3);
+  el.innerHTML = `
+    <div class="thumb">
+      <img src="assets/images/${p.img}" alt="${p.name}" loading="lazy">
+      <span class="view">View Details →</span>
+    </div>
+    <div class="meta">
+      <div class="loc">${p.loc}</div>
+      <h3>${p.name}</h3>
+      <div class="units">${p.units} Homes${p.land ? ' · '+p.land : ''}</div>
+    </div>`;
+  el.addEventListener('click', ()=>openModal(p));
+  grid.appendChild(el);
+});
+
+/* ticker */
+const tt = document.getElementById('tickerTrack');
+const names = projects.map(p=>p.name);
+[...names, ...names].forEach(n=>{
+  const s = document.createElement('span');
+  s.textContent = n;
+  tt.appendChild(s);
+});
+
+/* modal */
+const modal = document.getElementById('pmodal');
+function openModal(p){
+  document.getElementById('mImg').src = 'assets/images/'+p.img;
+  document.getElementById('mImg').alt = p.name;
+  document.getElementById('mLoc').textContent = p.loc;
+  document.getElementById('mName').textContent = p.name;
+  document.getElementById('mTag').textContent = p.tag;
+  document.getElementById('mDesc').textContent = p.desc;
+
+  const stats = document.getElementById('mStats');
+  stats.innerHTML = `<div><b>${p.units}</b><span>Homes</span></div>` +
+    (p.land ? `<div><b>${p.land}</b><span>Land Size</span></div>` : '') +
+    `<div><b>${p.types.length}</b><span>House Type${p.types.length>1?'s':''}</span></div>`;
+
+  const units = document.getElementById('mUnits');
+  units.innerHTML = p.types.map(([n,d])=>`<div class="u"><b>${n}</b><span>${d}</span></div>`).join('');
+
+  document.getElementById('mBrochure').href = p.url;
+  document.getElementById('mWhatsapp').href = `https://wa.me/2349133423363?text=${encodeURIComponent("Hi, I'm interested in "+p.name+".")}`;
+
+  modal.classList.add('open');
+  document.body.classList.add('lock');
+}
+function closeModal(){
+  modal.classList.remove('open');
+  document.body.classList.remove('lock-modal');
+  if(!document.getElementById('mainNav').classList.contains('open')) document.body.classList.remove('lock');
+}
+modal.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click', closeModal));
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+/* loader */
+window.addEventListener('load', ()=>{
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('hide');
+    document.body.classList.remove('lock');
+  }, 700);
+});
+
+/* header scroll state */
+const header = document.getElementById('siteHeader');
+const backTop = document.getElementById('backTop');
+function onScroll(){
+  const y = window.scrollY;
+  header.classList.toggle('scrolled', y > 80);
+  backTop.classList.toggle('show', y > 900);
+  const bg = document.getElementById('heroBg');
+  if(y < window.innerHeight) bg.style.transform = `translateY(${y*0.28}px) scale(1.02)`;
+}
+document.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+backTop.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
+
+/* burger */
+const burger = document.getElementById('burger');
+const mainNav = document.getElementById('mainNav');
+burger.addEventListener('click', ()=>{
+  burger.classList.toggle('open');
+  mainNav.classList.toggle('open');
+  document.body.classList.toggle('lock');
+});
+document.querySelectorAll('.nav-link').forEach(a=>a.addEventListener('click', ()=>{
+  burger.classList.remove('open'); mainNav.classList.remove('open'); document.body.classList.remove('lock');
+}));
+
+/* reveal on scroll */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, {threshold:.15, rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal, .reveal-scale').forEach(el=>io.observe(el));
+
+/* animated counters */
+const counters = document.querySelectorAll('[data-count]');
+const cio = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    cio.unobserve(e.target);
+    const target = +e.target.dataset.count;
+    const dur = 1400;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min(1, (now-start)/dur);
+      const eased = 1 - Math.pow(1-p, 3);
+      e.target.textContent = Math.round(target*eased).toLocaleString();
+      if(p<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}, {threshold:.5});
+counters.forEach(c=>cio.observe(c));
+
+/* contact form (front-end only) */
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const btn = this.querySelector('button');
+  const original = btn.textContent;
+  btn.textContent = 'Message Sent ✓';
+  this.reset();
+  setTimeout(()=>btn.textContent = original, 2600);
+});
+</script>
+</body>
+</html>
