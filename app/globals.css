@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Continuous decorative-loop animations (marquee, scroll cue, link underline) —
+   see styles/animations.css for why these live outside Tailwind's config. */
+@import "../styles/animations.css";
+
 html {
   scroll-behavior: smooth;
 }

@@ -42,7 +42,7 @@ export function Contact() {
             Adjacent CBN Quarters
           </InfoRow>
           <InfoRow k="Call">
-            <a href="tel:+2347002222111" className="hover:text-gold-dark">
+            <a href="tel:+2347002222111" className="link-underline hover:text-gold-dark">
               (+234) 700-222-2111
             </a>
           </InfoRow>
@@ -51,7 +51,7 @@ export function Contact() {
               href={whatsappLink("Hi, I'd like to know more about Bilaad Realty.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-gold-dark"
+              className="link-underline hover:text-gold-dark"
             >
               +234 913 342 3363
             </a>

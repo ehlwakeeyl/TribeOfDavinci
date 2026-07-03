@@ -65,19 +65,11 @@ const config: Config = {
         card: "0 30px 70px -30px rgba(30,25,15,.2)",
         modal: "0 60px 120px rgba(0,0,0,.5)",
       },
-      keyframes: {
-        ticker: {
-          from: { transform: "translateX(0)" },
-          to: { transform: "translateX(-50%)" },
-        },
-        cue: {
-          to: { top: "52px" },
-        },
-      },
-      animation: {
-        ticker: "ticker 42s linear infinite",
-        cue: "cue 2.2s infinite cubic-bezier(0.25,0.74,0.22,0.99)",
-      },
+      // Continuous decorative loops (marquee, scroll cue) are defined as plain
+      // CSS utility classes in styles/animations.css instead of here — see
+      // that file for why. One-shot reveal animations live in Framer Motion
+      // (components/animations/Reveal.tsx), so Tailwind's own keyframes/
+      // animation config is intentionally left empty.
     },
   },
   plugins: [require("tailwindcss-animate")],

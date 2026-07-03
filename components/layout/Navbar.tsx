@@ -48,6 +48,10 @@ export function Navbar() {
           open ? "max-md:translate-x-0" : "max-md:translate-x-full"
         )}
       >
+        {/* Nav links keep their own underline instead of the shared
+            .link-underline utility (styles/animations.css): the brand
+            underline is always gold, not currentColor, since header text
+            itself flips between white (over the hero) and ink (scrolled). */}
         {links.map((l) => (
           <a
             key={l.href}

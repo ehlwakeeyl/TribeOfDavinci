@@ -70,7 +70,7 @@ export function Hero() {
       <div className="absolute bottom-7 right-[6vw] z-[2] flex flex-col items-center gap-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/75">
         <span>Scroll</span>
         <span className="relative h-[52px] w-px overflow-hidden bg-gradient-to-b from-white/80 to-transparent">
-          <span className="absolute left-0 top-[-52px] h-[52px] w-full animate-cue bg-gold-light" />
+          <span className="animate-scroll-cue absolute left-0 top-[-52px] h-[52px] w-full bg-gold-light" />
         </span>
       </div>
     </section>

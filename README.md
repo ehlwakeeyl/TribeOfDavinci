@@ -51,6 +51,11 @@ lib/
 hooks/
   useScrolled.ts       Header scroll state
   useLockBody.ts       Body-scroll lock for mobile nav / modal
+styles/
+  animations.css       Continuous CSS-only loops (marquee, scroll cue, link
+                        underline) — kept separate from Tailwind's config and
+                        from Framer Motion's one-shot reveals; see the file's
+                        header comment for the reasoning
 public/
   images/              Real photos/renders sourced from bilaadnigeria.com
 ```

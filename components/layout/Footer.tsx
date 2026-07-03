@@ -79,7 +79,7 @@ function FooterLink({
       <a
         href={href}
         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-        className="text-[0.9rem] font-light transition-colors duration-300 hover:text-gold-light"
+        className="link-underline text-[0.9rem] font-light transition-colors duration-300 hover:text-gold-light"
       >
         {children}
       </a>
